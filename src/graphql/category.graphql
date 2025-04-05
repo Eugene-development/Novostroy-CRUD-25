@@ -1,0 +1,24 @@
+type Category {
+    id: CustomID!
+    key: CustomID!
+    # id: UUID!
+    # key: UUID!
+    is_active: Boolean
+    slug: String
+    value: String!
+    created_at: String
+    updated_at: String
+    product: [Product]
+        @field(
+            resolver: "App\\GraphQL\\Resolvers\\CategoryResolver@resolveProducts"
+        )
+    product_count: Int @count(relation: "product")
+    parentable: Parentable! @morphTo
+    metaTitle: MetaTitle @morphOne
+    metaDescription: MetaDescription @morphOne
+}
+
+extend type Query {
+    category(slug: String! @eq, key: UUID! @eq): Category @find
+    fullcategory: [Category!]! @all
+}

@@ -1,0 +1,28 @@
+type Catalog {
+    id: CustomID!
+    key: CustomID!
+    # id: UUID!
+    # key: UUID!
+    is_active: Boolean
+    slug: String
+    value: String
+    created_at: String
+    updated_at: String
+    rubric: [Rubric] @morphMany
+    text: Text @morphMany
+    image: [Image] @morphMany
+    metaTitle: MetaTitle @morphOne
+    metaDescription: MetaDescription @morphOne
+}
+
+extend type Query {
+    catalog(slug: String! @eq, key: UUID! @eq): Catalog @find
+    fullcatalog: [Catalog!]! @all
+    catalog_tree: [Catalog!]!
+        @all
+        @orderBy(column: "created_at", direction: "desc")
+    catalogCount: Int! @count(model: "Catalog")
+    catalog_tree_paginate: [Catalog!]!
+        @paginate(defaultCount: 2)
+        @orderBy(column: "created_at", direction: "desc")
+}

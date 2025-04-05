@@ -1,0 +1,54 @@
+type Product {
+    id: CustomID!
+    key: CustomID!
+    is_active: Boolean
+    slug: String
+    value: String!
+    created_at: String
+    updated_at: String
+
+    price: Price @morphOne
+    unit: Unit @morphOne
+    image: [Image]
+        @field(
+            resolver: "App\\GraphQL\\Resolvers\\ProductResolver@resolveImages"
+        )
+    video: [Video] @morphMany
+    tag: [Tag] @morphTo
+    parentable: Parentable @morphTo
+    metaTitle: MetaTitle @morphOne
+    metaDescription: MetaDescription @morphOne
+    taggables: [Taggable] @morphMany
+}
+
+extend type Query {
+    product(slug: String! @eq, key: UUID! @eq): Product @find
+}
+
+extend type Mutation {
+    createProduct(input: CreateProductInput! @spread): Product! @create
+    # updateProduct(input: UpdateProductInput @spread): Product @update
+    # updateStatusProduct(input: UpdateStatusProductInput @spread): Product
+    #     @update
+    # deleteProduct(id: ID! @whereKey): Product @delete
+}
+
+input CreateProductInput {
+    id: CustomID
+    key: CustomID!
+    # is_active: Boolean
+    value: String!
+    slug: String
+    parentable_type: String
+    parentable_id: CustomID
+    image: CreateImagesMorphMany
+    taggables: CreateTaggablesMorphMany @morphMany
+}
+
+input CreateImagesMorphMany {
+    create: [CreateImageInput!]!
+}
+
+input CreateTaggablesMorphMany {
+    create: [CreateTaggableInput!]!
+}

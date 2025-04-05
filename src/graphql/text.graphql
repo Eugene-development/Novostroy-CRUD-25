@@ -1,0 +1,7 @@
+type Text {
+    id: CustomID!
+    key: CustomID!
+    is_active: Boolean
+    value: String
+    parentable: Parentable @morphTo
+}

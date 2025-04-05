@@ -1,0 +1,19 @@
+type Taggable {
+    tag_id: CustomID!
+    taggable_id: CustomID!
+    taggable_type: String!
+}
+
+extend type Query {
+    taggables: [Taggable] @find
+}
+
+extend type Mutation {
+    createTaggable(input: CreateTaggableInput! @spread): Taggable! @create
+}
+
+input CreateTaggableInput {
+    tag_id: CustomID!
+    taggable_id: CustomID!
+    taggable_type: String!
+}

@@ -1,0 +1,16 @@
+type Tag {
+    id: CustomID!
+    key: CustomID!
+    is_active: Boolean
+    value: String!
+    slug: String
+    created_at: String
+    updated_at: String
+    # taggable: Taggable @morphToMany
+    # parentable: Parentable! @morphTo
+    product: [Product] @morphMany
+}
+
+extend type Query {
+    all_tags(key: CustomID @eq): [Tag] @all
+}

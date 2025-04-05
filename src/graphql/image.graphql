@@ -1,0 +1,22 @@
+type Image {
+    id: CustomID!
+    key: CustomID!
+    active: Boolean
+    hash: String
+    alt: String
+    created_at: String
+    parentable: Parentable! @morphTo
+}
+
+extend type Mutation {
+    createImage(input: CreateImageInput @spread): Image @create
+}
+
+input CreateImageInput {
+    id: CustomID!
+    key: CustomID!
+    hash: String!
+    alt: String
+    parentable_type: String
+    parentable_id: CustomID
+}

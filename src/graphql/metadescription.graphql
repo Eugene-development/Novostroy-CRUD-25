@@ -1,0 +1,9 @@
+type MetaDescription {
+    id: CustomID!
+    key: CustomID!
+    # id: UUID!
+    # key: UUID!
+    is_active: Boolean
+    value: String
+    parentable: Parentable @morphTo
+}

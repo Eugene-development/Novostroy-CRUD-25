@@ -1,0 +1,9 @@
+type Unit {
+    id: CustomID!
+    key: CustomID!
+    is_active: Boolean
+    slug: String
+    value: String!
+    created_at: String
+    updated_at: String
+}

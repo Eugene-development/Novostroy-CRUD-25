@@ -41,6 +41,11 @@ class Product extends RootModel
         return $this->morphOne(Unit::class, 'parentable');
     }
 
+    public function text(): MorphOne
+    {
+        return $this->morphOne(Text::class, 'parentable');
+    }
+
     // Отношение многие ко многим для тегов
     public function tag(): MorphToMany
     {

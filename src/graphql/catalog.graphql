@@ -9,7 +9,7 @@ type Catalog {
     created_at: String
     updated_at: String
     rubric: [Rubric] @morphMany
-    text: Text @morphMany
+    text: Text @morphOne
     image: [Image] @morphMany
     metaTitle: MetaTitle @morphOne
     metaDescription: MetaDescription @morphOne

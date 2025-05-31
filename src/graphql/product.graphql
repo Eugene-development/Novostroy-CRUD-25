@@ -9,6 +9,8 @@ type Product {
 
     price: Price @morphOne
     unit: Unit @morphOne
+    text: Text @morphOne
+
     image: [Image]
         @field(
             resolver: "App\\GraphQL\\Resolvers\\ProductResolver@resolveImages"

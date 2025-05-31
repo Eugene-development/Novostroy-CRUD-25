@@ -22,7 +22,7 @@ type Product {
 }
 
 extend type Query {
-    product(slug: String! @eq, key: UUID! @eq): Product @find
+    product(slug: String! @eq, key: CustomID! @eq): Product @find
 }
 
 extend type Mutation {

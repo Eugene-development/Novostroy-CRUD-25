@@ -19,6 +19,6 @@ type Category {
 }
 
 extend type Query {
-    category(slug: String! @eq, key: UUID! @eq): Category @find
+    category(slug: String! @eq, key: CustomID! @eq): Category @find
     fullcategory: [Category!]! @all
 }

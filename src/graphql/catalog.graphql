@@ -16,7 +16,7 @@ type Catalog {
 }
 
 extend type Query {
-    catalog(slug: String! @eq, key: UUID! @eq): Catalog @find
+    catalog(slug: String! @eq, key: CustomID! @eq): Catalog @find
     fullcatalog: [Catalog!]! @all
     catalog_tree: [Catalog!]!
         @all

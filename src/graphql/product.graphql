@@ -29,7 +29,7 @@ extend type Query {
 
 extend type Mutation {
     createProduct(input: CreateProductInput! @spread): Product! @create
-    # updateProduct(input: UpdateProductInput @spread): Product @update
+    updateProduct(input: UpdateProductInput @spread): Product @update
     # updateStatusProduct(input: UpdateStatusProductInput @spread): Product
     #     @update
     # deleteProduct(id: ID! @whereKey): Product @delete
@@ -53,4 +53,15 @@ input CreateImagesMorphMany {
 
 input CreateTaggablesMorphMany {
     create: [CreateTaggableInput!]!
+}
+
+input UpdateProductInput {
+    id: CustomID
+    key: CustomID!
+    is_active: Boolean
+    value: String!
+    slug: String
+    parentable_type: String
+    parentable_id: CustomID
+    # price: UpdatePriceMorphMany
 }

@@ -30,9 +30,12 @@ extend type Query {
 extend type Mutation {
     createProduct(input: CreateProductInput! @spread): Product! @create
     updateProduct(input: UpdateProductInput @spread): Product @update
+    deleteProduct(id: CustomID!): Product
+        @field(
+            resolver: "App\\GraphQL\\Resolvers\\ProductResolver@deleteProduct"
+        )
     # updateStatusProduct(input: UpdateStatusProductInput @spread): Product
     #     @update
-    # deleteProduct(id: ID! @whereKey): Product @delete
 }
 
 input CreateProductInput {

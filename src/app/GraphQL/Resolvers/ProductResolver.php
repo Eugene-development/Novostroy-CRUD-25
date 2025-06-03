@@ -13,4 +13,21 @@ class ProductResolver
     {
         return $root->image()->orderBy('created_at', 'ASC')->get();
     }
+
+    public function deleteProduct($root, array $args, GraphQLContext $context, ResolveInfo $resolveInfo)
+    {
+        $product = \App\Models\Product::findOrFail($args['id']);
+        // Каскадное удаление связанных сущностей
+        $product->image()->delete();
+        $product->video()->delete();
+        $product->price()->delete();
+        $product->unit()->delete();
+        $product->text()->delete();
+        $product->metaTitle()->delete();
+        $product->metaDescription()->delete();
+        $product->taggables()->delete();
+        // Удаление самого продукта
+        $product->delete();
+        return $product;
+    }
 }

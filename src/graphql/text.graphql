@@ -5,3 +5,18 @@ type Text {
     value: String
     parentable: Parentable @morphTo
 }
+
+input UpdateTextMorphOne {
+    update: UpdateTextInput!
+}
+
+input UpdateTextInput {
+    id: CustomID!
+    key: String!
+    value: String!
+}
+
+extend type Mutation {
+    createText(input: CreateTextInput @spread): Text @create
+    updateText(input: UpdateTextInput @spread): Text @update
+}
